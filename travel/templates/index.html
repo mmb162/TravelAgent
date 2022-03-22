@@ -1,0 +1,19 @@
+<!-- index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Homepage</h1>
+
+<ul>
+    {% for itinerary in object_list %}
+        <li>
+            <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
+            Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
+            Number of saves: {{ itinerary.saves.all.count }}
+        </li>
+    {% empty %}
+        <li>No itineraries created yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

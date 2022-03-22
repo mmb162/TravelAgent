@@ -1,0 +1,55 @@
+<!-- travel/profile_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ object }}</h1>
+
+{% if object.profile_picture %}
+    <img scr="{{ object.profile_picture.url }}" />
+{% endif %}
+
+<div>Biography:</div>
+<div>{{ object.biography }}</div>
+
+<h3>Published Itineraries:</h3>
+<ul>
+    {% for itinerary in published %}
+        <li>
+            <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
+        </li>
+    {% empty %}
+        <li>Not published any itineraries yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Saved Itineraries:</h3>
+<ul>
+    {% for itinerary in object.saved_itineraries.all %}
+        <li>
+            <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
+            Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
+        </li>
+    {% empty %}
+        <li>Not saved any itineraries yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Follows:</h3>
+<ul>
+    {% for follow in object.follows.all %}
+        <li><a href="{{ follow.get_absolute_url }}">{{ follow }}</a></li>
+    {% empty %}
+        <li>Not following any users yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Followers:</h3>
+<ul>
+    {% for follower in object.followers.all %}
+        <li><a href="{{ follower.get_absolute_url }}">{{ follower }}</a></li>
+    {% empty %}
+        <li>Not followed by any users yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
