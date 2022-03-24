@@ -27,6 +27,10 @@ http://127.0.0.1:8000/travel/
 
 ## Run Application Containerized
 
+If you need to install Docker Compose
+
+<https://docs.docker.com/compose/install/>
+
 `docker-compose build`
 
 `docker-compose up`
