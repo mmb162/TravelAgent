@@ -16,6 +16,14 @@ class Register(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
+class FilterView(TemplateView):
+    template_name = 'travel/filter.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context_user = Profile.objects.get(user=self.request.user)
+        context['itineraries'] = Itinerary.objects.distinct()
+        return context
 
 class ItineraryList(ListView):
     model = Itinerary

@@ -1,0 +1,20 @@
+<!-- travel/filter.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Find Itineraries</h1>
+
+<ul>
+    {% for itinerary in itineraries %}
+        <li>
+            <strong>{{ itinerary.name }}</strong>
+            Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
+            Number of saves: {{ itinerary.saves.all.count }}
+        </li>
+
+    {% empty %}
+        <li>No users you follow have created itineraries yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
