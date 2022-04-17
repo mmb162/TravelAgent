@@ -7,6 +7,7 @@ function followUser(userToFollow) {
     })
     .then(response => {
         console.log(response);
+        location.reload();
     });
 }
 
@@ -18,6 +19,7 @@ function saveItinerary(itinerary) {
             'X-CSRFToken': CSRF_TOKEN}
     })
     .then(response => {
-        console.log(response);
+        console.log(response)
+        location.reload();
     });
 }
