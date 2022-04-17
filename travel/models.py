@@ -48,25 +48,25 @@ class Itinerary(models.Model):
         ('More than 1 month', 'More than 1 month')
     ]
     MONTH_CHOICES = [
-        ('JANUARY', 'January'),
-        ('FEBRUARY', 'February'),
-        ('MARCH', 'March'),
-        ('APRIL', 'April'),
-        ('MAY', 'May'),
-        ('JUNE', 'June'),
-        ('JULY', 'July'),
-        ('AUGUST', 'August'),
-        ('SEPTEMBER', 'September'),
-        ('OCTOBER', 'October'),
-        ('NOVEMBER', 'November'),
-        ('DECEMBER', 'December')
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December')
     ]
     CLIMATE_CHOICES = [
-        ('TROPICAL', 'Tropical'),
-        ('DRY', 'Dry'),
-        ('TEMPERATE', 'Temperate'),
-        ('CONTINENTAL', 'Continental'),
-        ('POLAR', 'Polar')
+        ('Tropical', 'Tropical'),
+        ('Dry', 'Dry'),
+        ('Temperate', 'Temperate'),
+        ('Continental', 'Continental'),
+        ('Polar', 'Polar')
     ]
     name = models.CharField(max_length=200, blank=False, null=False, unique=True)
     slug = models.SlugField(unique=True)

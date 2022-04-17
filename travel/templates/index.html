@@ -10,6 +10,12 @@
             <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
             Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
             Number of saves: {{ itinerary.saves.all.count }}
+            {% if itinerary not in saved %}
+                <button onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
+            {% endif %}
+            {% if itinerary.created_by not in following %}
+                <button onclick="followUser('{{ itinerary.created_by }}')">Follow {{ itinerary.created_by }}</button>
+            {% endif %}
         </li>
     {% empty %}
         <li>No itineraries created yet.</li>

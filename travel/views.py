@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
+import json
 
 from .models import Itinerary, Profile
 
@@ -24,11 +26,14 @@ class ItineraryList(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        current_user = Profile.objects.get(user=self.request.user)
+        context['following'] = current_user.follows.all()
+        context['saved'] = current_user.saved_itineraries.all()
         return context
 
 
-class FollowingItinerariesView(TemplateView):
-    template_name = 'travel/following_itineraries.html'
+class FollowingUsersView(TemplateView):
+    template_name = 'travel/following_users.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,3 +75,30 @@ class ProfileUpdateView(UpdateView):
 
     def get_object(self, **kwargs):
         return Profile.objects.get(user=self.request.user)
+
+def FollowUser(request):
+    data = json.loads(request.body)
+    if request.method=='POST':
+        toFollowUser = User.objects.get(username=data['userToFollow'])
+        if not toFollowUser:
+            return HttpResponse("This user does not exist.")
+        toFollowProfile = Profile.objects.get(user=toFollowUser)
+        if not toFollowProfile:
+            return HttpResponse("This user does not exist.")
+        currentProfile = Profile.objects.get(user=request.user)
+        if currentProfile.follows.filter(pk=toFollowProfile.pk).exists():
+            return HttpResponse("You already follow this user.")
+        currentProfile.follows.add(toFollowProfile)
+    return HttpResponse(200)
+
+def SaveItinerary(request):
+    data = json.loads(request.body)
+    if request.method=='POST':
+        itinerary = Itinerary.objects.get(name=data['itinerary'])
+        if not itinerary:
+            return HttpResponse("This itinerary does not exist.")
+        currentProfile = Profile.objects.get(user=request.user)
+        if currentProfile.saved_itineraries.filter(pk=itinerary.pk).exists():
+            return HttpResponse("You already saved this itinerary.")
+        currentProfile.saved_itineraries.add(itinerary)
+    return HttpResponse(200)
