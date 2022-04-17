@@ -1,15 +1,18 @@
-<!-- travel/following_itineraries.html -->
+<!-- travel/following_users.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Following Itineraries</h1>
+<h1>Following Users</h1>
 
 <ul>
     {% for itinerary in itineraries %}
         <li>
-            <strong>{{ itinerary.name }}</strong>
+            <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
             Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
             Number of saves: {{ itinerary.saves.all.count }}
+            {% if request.user.username != itinerary.created_by.user.username and itinerary not in request.user.profile.saved_itineraries.all %}
+                <button onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
+            {% endif %}
         </li>
 
     {% empty %}

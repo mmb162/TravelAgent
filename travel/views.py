@@ -19,20 +19,17 @@ class Register(CreateView):
     template_name = 'registration/register.html'
 
 
-class ItineraryList(ListView):
+class ItineraryList(LoginRequiredMixin, ListView):
     model = Itinerary
     paginate_by = 100
     template_name='index.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        current_user = Profile.objects.get(user=self.request.user)
-        context['following'] = current_user.follows.all()
-        context['saved'] = current_user.saved_itineraries.all()
         return context
 
 
-class FollowingUsersView(TemplateView):
+class FollowingUsersView(LoginRequiredMixin, TemplateView):
     template_name = 'travel/following_users.html'
 
     def get_context_data(self, **kwargs):
@@ -52,7 +49,7 @@ class ItineraryCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ItineraryDetailView(DetailView):
+class ItineraryDetailView(LoginRequiredMixin, DetailView):
     model = Itinerary
     
     def get_context_data(self, **kwargs):
@@ -60,7 +57,7 @@ class ItineraryDetailView(DetailView):
         return context
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     
     def get_context_data(self, **kwargs):
@@ -69,12 +66,13 @@ class ProfileDetailView(DetailView):
         return context
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = ['profile_picture', 'biography']
 
     def get_object(self, **kwargs):
         return Profile.objects.get(user=self.request.user)
+
 
 def FollowUser(request):
     data = json.loads(request.body)
@@ -90,6 +88,7 @@ def FollowUser(request):
             return HttpResponse("You already follow this user.")
         currentProfile.follows.add(toFollowProfile)
     return HttpResponse(200)
+
 
 def SaveItinerary(request):
     data = json.loads(request.body)
