@@ -4,17 +4,15 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
+<h2 class="h2 mb-2 font-weight-normal">Login</h2>
   
-<form method="post">
+<form method="post" class="form-signin">
   {% csrf_token %}
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <table>
-    {{ form.as_p }}
-    <tr>
-      <td>&nbsp;</td>
-      <td><input type="submit" value="Login"></td>
-    </tr>                
+      {{ form.as_p }}
   </table>
+    <input type="submit" value="Login" class="text-center btn btn-lg btn-primary btn-block">              
 </form>
 
 {% endblock %}
