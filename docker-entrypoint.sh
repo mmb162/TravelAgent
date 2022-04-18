@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sleep 5
+sleep 4
+python3 manage.py collectstatic --noinput # default to yes
 python3 manage.py migrate
 python3 manage.py makemigrations
 python3 manage.py migrate
