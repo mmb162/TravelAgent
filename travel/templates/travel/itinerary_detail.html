@@ -3,6 +3,11 @@
 
 {% block content %}
 <h1>{{ object }}</h1>
+
+{% if request.user.username != object.created_by.user.username and object not in request.user.profile.saved_itineraries.all %}
+    <button onclick="saveItinerary('{{ object }}')">Save Itinerary</button>
+{% endif %}
+
 <div>
     <small>
         Created by <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a> on {{ object.created_at }}
@@ -27,7 +32,7 @@
 <div>Number of Saves: {{ object.saves.all.count }}</div>
 <div>Saved by:</div>
 <ul>
-    {% for save in object.saved.all %}
+    {% for save in object.saves.all %}
         <li>{{ save }}</li>
     {% empty %}
         <li>Not saved by any users yet.</li>

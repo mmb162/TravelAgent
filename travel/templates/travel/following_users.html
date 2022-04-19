@@ -1,11 +1,11 @@
-<!-- index.html -->
+<!-- travel/following_users.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Homepage</h1>
+<h1>Following Users</h1>
 
 <ul>
-    {% for itinerary in object_list %}
+    {% for itinerary in itineraries %}
         <li>
             <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
             Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
@@ -14,8 +14,9 @@
                 <button onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
             {% endif %}
         </li>
+
     {% empty %}
-        <li>No itineraries created yet.</li>
+        <li>No users you follow have created itineraries yet.</li>
     {% endfor %}
 </ul>
 
