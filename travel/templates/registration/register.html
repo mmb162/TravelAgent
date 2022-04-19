@@ -8,7 +8,25 @@
 
 <form method="post">
     {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Register" class="text-center btn btn-lg btn-primary btn-block">
+
+    {% for errors in form.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+
+    <div class="fieldWrapper col-9 ml-md-4 py-4">
+        <label class="row" for="{{ form.username.id_for_label }}">Username</label>
+        <span class="row help-text small">{{ form.username.help_text }}</span>
+        <div class="row">{{ form.username }}</div>
+    </div>
+    <div class="fieldWrapper col-9 ml-md-4 py-4">
+        <label class="row" for="{{ form.password1.id_for_label }}">Password:</label>
+        <span class="row help-text small">{{ form.password1.help_text }}</span>
+        <div class="row">{{ form.password1 }}</div>
+    </div>
+    <div class="fieldWrapper col-9 ml-md-4 py-4">
+        <label class="row" for="{{ form.password2.id_for_label }}">Password Confirmation:</label>
+        <div class="row">{{ form.password2 }}</div>
+    </div>
+    <input type="submit" value="Register" class="text-center btn btn-lg btn-primary">
 </form>
 {% endblock %}
