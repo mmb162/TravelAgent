@@ -8,9 +8,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
-import json
-
 from .models import Itinerary, Profile
+import json
 
 
 class Register(CreateView):
@@ -18,6 +17,23 @@ class Register(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
+class SearchResultsView(ListView):
+    model = Itinerary
+    template_name = 'travel/search_results.html'
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        budgetquery = self.request.GET.get("budget")
+        triplengthquery = self.request.GET.get("trip_length")
+        monthquery = self.request.GET.get("month")
+        climatequery = self.request.GET.get("climate")
+        object_list = Itinerary.objects.filter(
+            Q(name__icontains=query) & Q(budget__icontains=budgetquery) & Q(trip_length__icontains=triplengthquery) & Q(month__icontains=monthquery) & Q(climate__icontains=climatequery)
+        )
+        return object_list
+
+class FilterView(TemplateView):
+    template_name = 'travel/filter.html'
 
 class ItineraryList(LoginRequiredMixin, ListView):
     model = Itinerary

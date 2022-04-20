@@ -1,0 +1,9 @@
+<h1>Search Results</h1>
+
+<ul>
+  {% for itinerary in object_list %}
+    <li>
+      {{ itinerary.name }}, {{ itinerary.description }}
+    </li>
+  {% endfor %}
+</ul>

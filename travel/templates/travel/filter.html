@@ -1,0 +1,51 @@
+<h1>Search</h1>
+
+<form action="{% url 'search_results' %}" method="get">
+  <label>Name:</label>
+  <input name="q" type="text" placeholder="Search Name of Place">
+  <br/><br/>
+  <label>Budget:</label>
+  <select name = "budget">
+    <option value = "Less Than $500">Less Than $500</option>
+    <option value = "$500-1000">$500</option>
+    <option value = "$1000-2000">$1000-2000</option>
+    <option value = "More Than $2000">More Than $2000</option>
+ </select>
+  <br/><br/>
+  <label>Trip Length:</label>
+  <select name = "trip_length">
+    <option value = "Less Than A Week">Less Than A Week</option>
+    <option value = "One Week">One Week</option>
+    <option value = "Two Weeks">Two Weeks</option>
+    <option value = "Three Weeks">Three Weeks</option>
+    <option value = "Four Weeks">Four Weeks</option>
+    <option value = "More Than 1 Month">More Than 1 Month</option>
+ </select>
+  <br/><br/>
+  <label>Month:</label>
+  <select name = "month">
+    <option value = "JANUARY">JANUARY</option>
+    <option value = "February">February</option>
+    <option value = "March">March</option>
+    <option value = "April">April</option>
+    <option value = "May">May</option>
+    <option value = "June">June</option>
+    <option value = "July">July</option>
+    <option value = "August">August</option>
+    <option value = "September">September</option>
+    <option value = "October">October</option>
+    <option value = "November">November</option>
+    <option value = "December">December</option>
+ </select>
+  <br/><br/>
+  <label>Climate:</label>
+  <select name = "climate">
+    <option value = "TROPICAL">TROPICAL</option>
+    <option value = "Dry">Dry</option>
+    <option value = "Temperate">Temperate</option>
+    <option value = "Continental">Continental</option>
+    <option value = "Polar">Polar</option>
+ </select>
+  <br/><br/>
+  <button type="submit">Submit</button>
+</form>
