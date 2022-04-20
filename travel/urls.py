@@ -16,6 +16,7 @@ urlpatterns = [
 # requests
 urlpatterns += [
     path('follow-user/', views.FollowUser, name='follow-user'),
-    path('save-itinerary/', views.SaveItinerary, name='save-itinerary')
+    path('save-itinerary/', views.SaveItinerary, name='save-itinerary'),
+    path('filter/', views.FilterView.as_view(), name="filter"),
+    path("search/", views.SearchResultsView.as_view(), name="search_results"),
 ]
-

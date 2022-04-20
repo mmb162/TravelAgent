@@ -30,6 +30,7 @@
                 <a class="btn btn-sm btn-outline-secondary" href="{{ user.profile.get_absolute_url }}">My Profile</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'profile-update' %}">Edit Profile</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'itinerary-add' %}">Create Itinerary</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'filter' %}">Find Itinerary</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a>
               {% else %}
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
