@@ -1,5 +1,6 @@
 <!-- registration/login.html -->
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
@@ -8,11 +9,11 @@
   
 <form method="post" class="form-signin">
   {% csrf_token %}
-  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <table>
+  <img class="mb-4" src="{% static 'icon.jpg' %}" alt="" width="72" height="72">
       {{ form.as_p }}
   </table>
-    <input type="submit" value="Login" class="text-center btn btn-lg btn-primary btn-block">              
+    <input type="submit" value="Login" class="text-center btn btn-lg btn-primary">              
 </form>
 
 {% endblock %}
