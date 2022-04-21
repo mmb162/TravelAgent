@@ -6,9 +6,13 @@
 
 <ul>
   {% for itinerary in object_list %}
-    <li>
-      {{ itinerary.name }}, {{ itinerary.description }}
-    </li>
+  <li>
+    <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
+    <p>{{itinerary.description}}</p>
+    {% if request.user.username != itinerary.created_by.user.username and itinerary not in request.user.profile.saved_itineraries.all %}
+        <button onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
+    {% endif %}
+</li>
   {% endfor %}
 </ul>
 

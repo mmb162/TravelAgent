@@ -9,6 +9,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
 from .models import Itinerary, Profile
+from itertools import chain
 import json
 from django.db.models import Q 
 
@@ -27,9 +28,16 @@ class SearchResultsView(ListView):
         triplengthquery = self.request.GET.get("trip_length")
         monthquery = self.request.GET.get("month")
         climatequery = self.request.GET.get("climate")
-        object_list = Itinerary.objects.filter(
-            Q(name__icontains=query) & Q(budget__icontains=budgetquery) & Q(trip_length__icontains=triplengthquery) & Q(month__icontains=monthquery) & Q(climate__icontains=climatequery)
-        )
+        if(Itinerary.name != ""):
+            object_list = Itinerary.objects.filter(Q(name__icontains=query))
+        if(budgetquery != "Any Budget"):
+            object_list = object_list & Itinerary.objects.filter(Q(budget__icontains=budgetquery))
+        if(triplengthquery != "Any Trip Length"):
+            object_list = object_list & Itinerary.objects.filter(Q(trip_length__icontains=triplengthquery))
+        if(monthquery != "Any Month"):
+            object_list = object_list & Itinerary.objects.filter(Q(month__icontains=monthquery))
+        if(climatequery != "Any Climate"):
+            object_list = object_list & Itinerary.objects.filter(Q(climate__icontains=climatequery))
         return object_list
 
 class FilterView(TemplateView):
