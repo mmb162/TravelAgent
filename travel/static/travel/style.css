@@ -1,8 +1,7 @@
-body {
-    color: green;
-    text-align: center;
-}
-
 ul {
     list-style-type: none;
+}
+
+body {
+    background-color: #cce6ec;
 }
