@@ -21,7 +21,7 @@
           <p>Welcome, {{ user.username|default:'Guest' }}!</p>
         </div>
         <div class="col-4 text-center">
-          <h1 class="display-1"><a class="blog-header-logo text-dark" href="#">TravelAgent</a></h1>
+          <h1 class="display-1"><a class="blog-header-logo text-dark" href="{% url 'index' %}">TravelAgent</a></h1>
         </div>
         <div class="col-4 pt-1">
             <div class="btn-toolbar mb-2 mb-md-0">

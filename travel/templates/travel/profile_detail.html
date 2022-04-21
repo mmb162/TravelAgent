@@ -8,7 +8,7 @@
     <img scr="{{ object.profile_picture.url }}" />
 {% endif %}
 
-{% if object not in following and request.user.username != object.user.username %}
+{% if object not in request.user.profile.follows.all and request.user.username != object.user.username %}
     <button onclick="followUser('{{ object }}')">Follow {{ object }}</button>
 {% endif %}
 
