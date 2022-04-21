@@ -5,16 +5,31 @@
 <h1>Following Users</h1>
 
 <ul>
+    <div class="d-flex flex-wrap">
     {% for itinerary in itineraries %}
         <li>
-            <strong><a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a></strong>
-            Created by: <a href="{{ itinerary.created_by.get_absolute_url }}">{{ itinerary.created_by }}</a>
-            Number of saves: {{ itinerary.saves.all.count }}
-            {% if request.user.username != itinerary.created_by.user.username and itinerary not in request.user.profile.saved_itineraries.all %}
-                <button onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
-            {% endif %}
+            <div class="card m-2" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                    <h5 class="card-title text-left">
+                        <a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a>
+                    </h5>
+                    <p class="card-text text-left">{{ itinerary.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-left">{{ itinerary.budget }}</li>
+                    <li class="list-group-item text-left">{{ itinerary.trip_length }}</li>
+                    <li class="list-group-item text-left">{{ itinerary.month }}</li>
+                    <li class="list-group-item text-left">{{ itinerary.climate }}</li>
+                </ul>
+                <div class="card-body d-flex justify-content-between align-content-center">
+                    <a href="{{ itinerary.created_by.get_absolute_url }}" class="card-link">{{ itinerary.created_by }}</a>
+                    {% if request.user.username != itinerary.created_by.user.username and itinerary not in request.user.profile.saved_itineraries.all %}
+                        <button type="button" class="btn btn-primary btn-sm text-center" onclick="saveItinerary('{{ itinerary }}')">Save Itinerary</button>
+                    {% endif %}
+                </div>
+            </div>
         </li>
-
     {% empty %}
         <li>No users you follow have created itineraries yet.</li>
     {% endfor %}

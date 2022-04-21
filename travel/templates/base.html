@@ -3,9 +3,9 @@
 <html lang="en">
   <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'travel/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'travel/style.css' %}">
     <script src="{% static 'travel/script.js' %}"></script>
     <script>
       var CSRF_TOKEN = '{{ csrf_token }}';
@@ -17,20 +17,18 @@
   <body class="text-center">
     <header class="blog-header py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-4 pt-1">
-          <p>Welcome, {{ user.username|default:'Guest' }}!</p>
-        </div>
         <div class="col-4 text-center">
-          <h1 class="display-1"><a class="blog-header-logo text-dark" href="{% url 'index' %}">TravelAgent</a></h1>
+          <h1 class="display-3"><a class="blog-header-logo text-dark" href="{% url 'index' %}">TravelAgent</a></h1>
         </div>
         <div class="col-4 pt-1">
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
               {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'itinerary-add' %}">Create Itinerary</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'following-users' %}">Following Users</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'filter' %}">Find Itineraries</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{{ user.profile.get_absolute_url }}">My Profile</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'profile-update' %}">Edit Profile</a>
-                <a class="btn btn-sm btn-outline-secondary" href="{% url 'itinerary-add' %}">Create Itinerary</a>
-                <a class="btn btn-sm btn-outline-secondary" href="{% url 'filter' %}">Find Itinerary</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a>
               {% else %}
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
@@ -38,6 +36,9 @@
               {% endif %}
                 </div>
           </div>
+        </div>
+        <div class="col-4 pt-1">
+          <p>Welcome, {{ user.username|default:'Guest' }}!</p>
         </div>
       </div>
     </header>
