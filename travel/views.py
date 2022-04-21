@@ -33,7 +33,7 @@ class SearchResultsView(ListView):
         if(budgetquery != "Any Budget"):
             object_list = object_list & Itinerary.objects.filter(Q(budget__icontains=budgetquery))
         if(triplengthquery != "Any Trip Length"):
-            object_list = object_list & Itinerary.objects.filter(Q(trip_length__icontains=triplengthquery))
+            object_list = object_list & Itinerary.objects.filter(Q(trip_length__icontains=budgetquery))
         if(monthquery != "Any Month"):
             object_list = object_list & Itinerary.objects.filter(Q(month__icontains=monthquery))
         if(climatequery != "Any Climate"):
