@@ -58,7 +58,7 @@ class FollowingUsersView(LoginRequiredMixin, TemplateView):
 class ItineraryCreateView(LoginRequiredMixin, CreateView):
     model = Itinerary
     success_url = reverse_lazy('index')
-    fields = ['name', 'description', 'budget', 'trip_length', 'month', 'climate']
+    fields = ['name', 'picture', 'description', 'budget', 'trip_length', 'month', 'climate']
 
     def form_valid(self, form):
         form.instance.created_by = Profile.objects.get(user=self.request.user)

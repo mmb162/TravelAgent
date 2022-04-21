@@ -9,7 +9,7 @@
   {% for itinerary in object_list %}
       <li>
           <div class="card m-2" style="width: 18rem;">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <img class="card-img-top" src="{{ itinerary.picture.url }}" alt="Card image cap">
               <div class="card-body">
                   <h5 class="card-title text-left">
                       <a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a>

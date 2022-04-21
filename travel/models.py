@@ -70,6 +70,7 @@ class Itinerary(models.Model):
     ]
     name = models.CharField(max_length=200, blank=False, null=False, unique=True)
     slug = models.SlugField(unique=True)
+    picture = models.ImageField(upload_to='itinerary_pictures/', blank=False)
     description = models.TextField(blank=True)
     budget = models.CharField(max_length=15, choices=BUDGET_CHOICES, default='Less than $500')
     trip_length = models.CharField(max_length=17, choices=TRIP_LENGTH_CHOICES, default='Less than 1 week')

@@ -5,7 +5,7 @@
 <h1>{{ object }}</h1>
 
 {% if object.profile_picture %}
-    <img scr="{{ object.profile_picture.url }}" />
+    <div><img src="{{ object.profile_picture.url }}" class="img-responsive"></div>
 {% endif %}
 
 {% if object not in request.user.profile.follows.all and request.user.username != object.user.username %}
@@ -21,7 +21,7 @@
     {% for itinerary in published %}
         <li>
             <div class="card m-2" style="width: 18rem;">
-                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <img class="card-img-top" src="{{ itinerary.picture.url }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title text-left">
                         <a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a>
@@ -53,7 +53,7 @@
         {% for itinerary in object.saved_itineraries.all %}
             <li>
                 <div class="card m-2" style="width: 18rem;">
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <img class="card-img-top" src="{{ itinerary.picture.url }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title text-left">
                             <a href="{{ itinerary.get_absolute_url }}">{{ itinerary.name }}</a>
