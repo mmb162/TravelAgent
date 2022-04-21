@@ -7,7 +7,7 @@
 <img class="card-img-top" src="{{ object.picture.url }}" alt="Card image cap">
 
 {% if request.user.username != object.created_by.user.username and object not in request.user.profile.saved_itineraries.all %}
-    <button onclick="saveItinerary('{{ object }}')">Save Itinerary</button>
+    <button class="btn btn-primary" onclick="saveItinerary('{{ object }}')">Save Itinerary</button>
 {% endif %}
 
 <div>

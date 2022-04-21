@@ -9,7 +9,7 @@
 {% endif %}
 
 {% if object not in request.user.profile.follows.all and request.user.username != object.user.username %}
-    <button onclick="followUser('{{ object }}')">Follow {{ object }}</button>
+    <button class="btn btn-primary" onclick="followUser('{{ object }}')">Follow {{ object }}</button>
 {% endif %}
 
 <div>Biography:</div>
