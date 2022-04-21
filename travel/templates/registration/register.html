@@ -1,14 +1,36 @@
 <!--registration/register.html-->
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<h2>Register</h2>
+<h2 class="ht mb-2 font-weight-normal">Register</h2>
+<img class="mb-4" src="{% static 'icon.jpg' %}" alt="" width="72" height="72">
 
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Register">
-</form>
+<div class="d-flex justify-content-center">
+    <form method="post" class="form-signin">
+        {% csrf_token %}
+
+        {% for errors in form.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+
+        <div class="fieldWrapper col-9 ml-md-4 py-4">
+            <label class="row" for="{{ form.username.id_for_label }}">Username</label>
+            <span class="row help-text small">{{ form.username.help_text }}</span>
+            <div class="row">{{ form.username }}</div>
+        </div>
+        <div class="fieldWrapper col-9 ml-md-4 py-4">
+            <label class="row" for="{{ form.password1.id_for_label }}">Password:</label>
+            <span class="row help-text small">{{ form.password1.help_text }}</span>
+            <div class="row">{{ form.password1 }}</div>
+        </div>
+        <div class="fieldWrapper col-9 ml-md-4 py-4">
+            <label class="row" for="{{ form.password2.id_for_label }}">Password Confirmation:</label>
+            <div class="row">{{ form.password2 }}</div>
+        </div>
+        <input type="submit" value="Register" class="text-center btn btn-lg btn-primary">
+    </form>
+</div>
 {% endblock %}

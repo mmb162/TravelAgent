@@ -1,3 +1,7 @@
+<!-- travel/filter.html -->
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Search</h1>
 
 <form action="{% url 'search_results' %}" method="get">
@@ -49,3 +53,4 @@
   <br/><br/>
   <button type="submit">Submit</button>
 </form>
+{% endblock %}

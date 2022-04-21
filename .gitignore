@@ -173,3 +173,7 @@ cython_debug/
 data/*
 *.swp
 *.swo
+
+root/*
+!root/README.md
+

@@ -9,7 +9,8 @@ urlpatterns = [
     path('profile/<slug:slug>/', views.ProfileDetailView.as_view(), name='profile-detail'),
     path('profile/update', views.ProfileUpdateView.as_view(), name='profile-update'),
     path('itinerary/add/', views.ItineraryCreateView.as_view(), name='itinerary-add'),
-    path('itinerary/<slug:slug>/', views.ItineraryDetailView.as_view(), name='itinerary-detail')
+    path('itinerary/<slug:slug>/', views.ItineraryDetailView.as_view(), name='itinerary-detail'),
+    path('find/', views.FilterView.as_view(), name='find-itinerary')
 ]
 
 # requests

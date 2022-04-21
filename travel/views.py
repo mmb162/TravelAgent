@@ -10,7 +10,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
 from .models import Itinerary, Profile
 import json
-
+from django.db.models import Q 
 
 class Register(CreateView):
     form_class = UserCreationForm
@@ -117,3 +117,4 @@ def SaveItinerary(request):
             return HttpResponse("You already saved this itinerary.")
         currentProfile.saved_itineraries.add(itinerary)
     return HttpResponse(200)
+
